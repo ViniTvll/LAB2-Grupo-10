@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-public class ProveedorController {
+public class ArtistaController {
 
-    final ProveedorRepository proveedorRepository;
 
-    public ArtistaController(ProveedorRepository artistaRepository) {
-        this.proveedorRepository = artistaRepository;
+    final ArtistaRepository artistaRepository;
+
+    public ArtistaController(ArtistaRepository artistaRepository) {
+        this.artistaRepository = artistaRepository;
     }
 
     @GetMapping("/listar")
