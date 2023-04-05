@@ -1,10 +1,9 @@
 package com.example.lab2_grupo10.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+
+@Entity
 public class Artista {
 
     @Id
