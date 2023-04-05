@@ -1,7 +1,9 @@
 package com.example.lab2_grupo10.Controllers;
 
 import com.example.lab2_grupo10.Entity.Artista;
+import com.example.lab2_grupo10.Entity.Proveedor;
 import com.example.lab2_grupo10.repository.ArtistaRepository;
+import com.example.lab2_grupo10.repository.ProveedorRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,26 +15,26 @@ public class ProveedorController {
 
     final ProveedorRepository proveedorRepository;
 
-    public ArtistaController(ProveedorRepository artistaRepository) {
-        this.proveedorRepository = artistaRepository;
+    public ProveedorController(ProveedorRepository proveedorRepository) {
+        this.proveedorRepository = proveedorRepository;
     }
 
     @GetMapping("/listar")
     public String listar(Model model) {
 
-        model.addAttribute("lista", artistaRepository.findAll());
-        return "shipper/lista";
+        model.addAttribute("lista", proveedorRepository.findAll());
+        return "proveedor/lista";
     }
 
     @GetMapping("/nuevo")
     public String nuevo() {
-        return "artista/nuevoForm";
+        return "proveedor/nuevoForm";
     }
 
     @PostMapping("/guardar")
-    public String guardar(Artista artista) {
-        artistaRepository.save(artista);
-        System.out.println(artista.getId());
+    public String guardar(Proveedor proveedor) {
+        proveedorRepository.save(proveedor);
+        System.out.println(proveedor.getId());
 
         return "redirect:/listar";
     }
@@ -40,10 +42,10 @@ public class ProveedorController {
     @GetMapping("/editar")
     public String editar(@RequestParam("id") int id, Model model) {
 
-        Optional<Artista> artistaOptional = artistaRepository.findById(id);
+        Optional<Proveedor> artistaOptional = proveedorRepository.findById(id);
         if (artistaOptional.isPresent()) {
-            Artista artista = artistaOptional.get();
-            model.addAttribute("artista", artista);
+            Proveedor proveedor = artistaOptional.get();
+            model.addAttribute("artista", proveedor);
             return "artista/editarForm";
         } else {
             return "redirect:/listar";
@@ -52,9 +54,9 @@ public class ProveedorController {
 
     @GetMapping("/borrar")
     public String borrar(@RequestParam("id") int id) {
-        Optional<Artista> artistaOptional = artistaRepository.findById(id);
-        if (artistaOptional.isPresent()) {
-            artistaRepository.deleteById(id);
+        Optional<Proveedor> proveedorOptional = proveedorRepository.findById(id);
+        if (proveedorOptional.isPresent()) {
+            proveedorRepository.deleteById(id);
         }
         return "redirect:/listar";
 
