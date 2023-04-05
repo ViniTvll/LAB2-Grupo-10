@@ -5,10 +5,13 @@ import com.example.lab2_grupo10.repository.ArtistaRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
+
+@RequestMapping("/artista")
 public class ArtistaController {
 
 
@@ -22,7 +25,7 @@ public class ArtistaController {
     public String listar(Model model) {
 
         model.addAttribute("lista", artistaRepository.findAll());
-        return "shipper/lista";
+        return "artista/lista";
     }
 
     @GetMapping("/nuevo")
