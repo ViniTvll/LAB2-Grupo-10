@@ -1,9 +1,10 @@
 package com.example.lab2_grupo10.Entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-
-@Entity
 public class Integrante {
 
     @Id

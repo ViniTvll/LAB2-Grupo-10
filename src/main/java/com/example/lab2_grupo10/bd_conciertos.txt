@@ -1,0 +1,163 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema conciertosperu
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `conciertosperu` ;
+
+-- -----------------------------------------------------
+-- Schema conciertosperu
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `conciertosperu` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `conciertosperu` ;
+
+-- -----------------------------------------------------
+-- Table `conciertosperu`.`artistas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `conciertosperu`.`artistas` (
+  `idArtistas` INT NOT NULL,
+  `Nombre_Grupo` VARCHAR(45) NULL DEFAULT NULL,
+  `Fecha_creacion` DATE NULL DEFAULT NULL,
+  `Tipo_musica` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idArtistas`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `conciertosperu`.`proveedores`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `conciertosperu`.`proveedores` (
+  `idProveedores` INT NOT NULL,
+  `Nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `Telefono` INT NULL DEFAULT NULL,
+  `Elemento` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idProveedores`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `conciertosperu`.`concierto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `conciertosperu`.`concierto` (
+  `idConcierto` INT NOT NULL,
+  `Fecha_evento` VARCHAR(45) NULL DEFAULT NULL,
+  `proveedores_idProveedores` INT NOT NULL,
+  `artistas_idArtistas` INT NOT NULL,
+  PRIMARY KEY (`idConcierto`),
+  INDEX `fk_Concierto_proveedores_idx` (`proveedores_idProveedores` ASC) VISIBLE,
+  INDEX `fk_Concierto_artistas1_idx` (`artistas_idArtistas` ASC) VISIBLE,
+  CONSTRAINT `fk_Concierto_artistas1`
+    FOREIGN KEY (`artistas_idArtistas`)
+    REFERENCES `conciertosperu`.`artistas` (`idArtistas`),
+  CONSTRAINT `fk_Concierto_proveedores`
+    FOREIGN KEY (`proveedores_idProveedores`)
+    REFERENCES `conciertosperu`.`proveedores` (`idProveedores`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `conciertosperu`.`integrantes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `conciertosperu`.`integrantes` (
+  `idIntegrantes` INT NOT NULL,
+  `Nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `Edad` INT NULL DEFAULT NULL,
+  `Anhios_exp` INT NULL DEFAULT NULL,
+  `rol` VARCHAR(40) NULL DEFAULT NULL,
+  `artistas_idArtistas` INT NOT NULL,
+  PRIMARY KEY (`idIntegrantes`),
+  INDEX `fk_integrantes_artistas1_idx` (`artistas_idArtistas` ASC) VISIBLE,
+  CONSTRAINT `fk_integrantes_artistas1`
+    FOREIGN KEY (`artistas_idArtistas`)
+    REFERENCES `conciertosperu`.`artistas` (`idArtistas`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+
+
+
+
+
+
+
+TRUNCATE TABLE proveedores;
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (1,"Otto Kuns","980347768","embutidos");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (2,"Rey","987654321","sillas");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (3,"Proled","986754321","luces");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (4,"Makro","978654321","hielo");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (5,"Mayorsa","987564321","bebidas");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (6,"Altec","987653421","microfonos");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (7,"Swisspack","987654312","vasos");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (8,"Intcomex","998765432","parlantes");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (9,"Backus","999876543","licores");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (10,"Concentric","999987654","cables");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (11,"Intouch","988765432","pantallas");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (12,"Archiexpo","987765432","maquinas humo");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (13,"ineventos","987665432","fuegos artificiales");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (14,"Misterpulseras","987655432","pulseras");
+Insert into proveedores (idProveedores,Nombre,Telefono,Elemento) values (15,"Klaketamerch","987654432","merch");
+
+TRUNCATE TABLE artistas;
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (1,"Grupo 5","1992-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (2,"Agua Marina","1996-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (3,"Hermanos Yaipen","1992-07-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (4,"Agua Bella","1999-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (5,"Armonia 10","1982-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (6,"Nectar","2003-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (7,"Corazon Serrano","1999-06-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (8,"Tony Rosado","1998-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (9,"Grupo Celeste","1974-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (10,"Kaliente","2001-04-08","cumbia");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (11,"Rio","1986-04-18","rock");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (12,"Enanitos verdes","1989-04-08","rock");
+Insert into artistas (idArtistas,Nombre_Grupo,Fecha_creacion,Tipo_musica) values (13,"Soda Estereo","1992-04-08","rock");
+
+TRUNCATE TABLE integrantes;
+
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (1,"Elmer Yaipen","55","25","baterista",1);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (2,"José Quiroga","60","30","voz",2);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (3,"Devis Orozco","38","13","voz",6);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (4,"Edwin Guerrero","62","32","voz",7);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (5,"Tony Rosado","63","30","voz",8);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (6,"Lorenzo Palacios","84","46","voz",9);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (7,"Ruben Sara ","55","22","manager",10);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (8,"Walter Yaipen","65","30","baterista",3);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (9,"Maricarmen Marin","37","25","voz",4);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (10,"Pocho Prieto","58","20","voz",11);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (11,"Marciano Cantero","55","20","bajo electrico",12);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (12,"Gustavo Cerati","48","15","voz",13);
+Insert into integrantes (idIntegrantes,Nombre,Edad,Anhios_exp,rol,artistas_idArtistas) values (13,"Makuko","51","20","voz",5);
+
+TRUNCATE TABLE concierto;
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (1,"2023-12-08",1,1);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (2,"2024-01-08",2,2);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (3,"2024-02-08",3,3);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (4,"2024-03-08",4,4);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (5,"2024-04-08",5,5);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (6,"2024-05-08",6,6);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (7,"2024-06-08",7,7);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (8,"2024-07-08",8,8);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (9,"2024-08-08",9,9);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (10,"2024-09-08",10,10);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (11,"2024-10-08",11,11);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (12,"2024-11-08",12,12);
+Insert into concierto (idConcierto,Fecha_evento,proveedores_idproveedores,artistas_idArtistas) values (13,"2024-12-08",13,13);
+
+
+
